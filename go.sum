@@ -1,10 +1,4 @@
-github.com/katana-project/ffmpeg v0.0.0-20231120165151-b409e016643d h1:tnxQ8jrxI7GqmbVKemziAZr06uNOGFTRoft6omLUDSg=
-github.com/katana-project/ffmpeg v0.0.0-20231120165151-b409e016643d/go.mod h1:F1qjE2D+fxgHbrd1mbMt3qyrM7+gLXmlkjfc1c1bLak=
-github.com/katana-project/ffmpeg v0.0.0-20231120184152-879a9db26f0c h1:1i2UP3iiaIsTMpCNZ3g7sbGhP60DSwBTFmPbRjyIhQg=
-github.com/katana-project/ffmpeg v0.0.0-20231120184152-879a9db26f0c/go.mod h1:F1qjE2D+fxgHbrd1mbMt3qyrM7+gLXmlkjfc1c1bLak=
-github.com/katana-project/ffmpeg v0.0.0-20231121162557-934745b44df1 h1:KKcfNOLmNKJB5SE5GD8IcR9P9snulQoULpS8BsVifF0=
-github.com/katana-project/ffmpeg v0.0.0-20231121162557-934745b44df1/go.mod h1:F1qjE2D+fxgHbrd1mbMt3qyrM7+gLXmlkjfc1c1bLak=
-github.com/katana-project/ffmpeg v0.0.0-20231123175032-0834dba13343 h1:p5oTX3bO+oFSfvDbpaj0pijbYI3nLFWBjIlKYSHx0mU=
-github.com/katana-project/ffmpeg v0.0.0-20231123175032-0834dba13343/go.mod h1:F1qjE2D+fxgHbrd1mbMt3qyrM7+gLXmlkjfc1c1bLak=
-github.com/katana-project/ffmpeg v0.0.0-20231125184311-bee6faddc690 h1:0Ww4Wx21iaTu/lsm4VXMBP1BSaMUX+qBqKbJLNQ6MQM=
-github.com/katana-project/ffmpeg v0.0.0-20231125184311-bee6faddc690/go.mod h1:sd/wsWR4/Elmnsq9+c3XQqIQSkzRjF/zoNnADRt0kz0=
+github.com/katana-project/ffmpeg v0.0.0-20231126115529-5f1bc7ed0d2b h1:Se8NFZ9FHXCaB0Rqjivnebz71TW/BKtS2KiefruPSs8=
+github.com/katana-project/ffmpeg v0.0.0-20231126115529-5f1bc7ed0d2b/go.mod h1:sd/wsWR4/Elmnsq9+c3XQqIQSkzRjF/zoNnADRt0kz0=
+github.com/katana-project/ffmpeg v0.0.0-20231126120620-955fbea1d428 h1:8CT2dUFBD6DhJnHGTd7DnNgGLrDKe1bDitv8q5lsGiQ=
+github.com/katana-project/ffmpeg v0.0.0-20231126120620-955fbea1d428/go.mod h1:sd/wsWR4/Elmnsq9+c3XQqIQSkzRjF/zoNnADRt0kz0=

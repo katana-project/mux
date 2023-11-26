@@ -6,23 +6,34 @@ import (
 )
 
 type Codec struct {
+	id       avcodec.CodecID
 	enc, dec *avcodec.Codec
 }
 
 func NewCodec(id avcodec.CodecID) *Codec {
-	return &Codec{enc: avcodec.FindEncoder(id), dec: avcodec.FindDecoder(id)}
+	return &Codec{
+		id:  id,
+		enc: avcodec.FindEncoder(id),
+		dec: avcodec.FindDecoder(id),
+	}
 }
 
 func FindCodec(name string) *Codec {
 	var (
+		id avcodec.CodecID
+
 		enc = avcodec.FindEncoderByName(name)
 		dec = avcodec.FindDecoderByName(name)
 	)
-	if enc == nil && dec == nil {
+	if enc != nil {
+		id = enc.ID()
+	} else if dec != nil {
+		id = dec.ID()
+	} else {
 		return nil
 	}
 
-	return &Codec{enc: enc, dec: dec}
+	return &Codec{id: id, enc: enc, dec: dec}
 }
 
 func MustFindCodec(name string) *Codec {

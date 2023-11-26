@@ -3,6 +3,7 @@ package mux
 import (
 	"fmt"
 	"github.com/katana-project/ffmpeg"
+	"github.com/katana-project/ffmpeg/avcodec"
 	"github.com/katana-project/ffmpeg/avformat"
 	"path/filepath"
 	"slices"
@@ -88,6 +89,10 @@ func (m *Muxer) Extensions() []string {
 
 func (m *Muxer) Input() bool {
 	return false
+}
+
+func (m *Muxer) SupportsCodec(codec *Codec) bool {
+	return m.fmt.QueryCodec(codec.id, avcodec.ComplianceNormal) > 0
 }
 
 type Demuxer struct {

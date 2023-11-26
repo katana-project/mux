@@ -12,6 +12,7 @@ const (
 	MediaTypeAudio
 	MediaTypeVideo
 	MediaTypeSubtitle
+	MediaTypeAttachment
 )
 
 type Stream struct {
@@ -30,6 +31,8 @@ func (s *Stream) Type() MediaType {
 		return MediaTypeVideo
 	case avutil.MediaTypeSubtitle:
 		return MediaTypeSubtitle
+	case avutil.MediaTypeAttachment:
+		return MediaTypeAttachment
 	}
 
 	return MediaTypeUnknown
