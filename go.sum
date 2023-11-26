@@ -2,3 +2,5 @@ github.com/katana-project/ffmpeg v0.0.0-20231126115529-5f1bc7ed0d2b h1:Se8NFZ9FH
 github.com/katana-project/ffmpeg v0.0.0-20231126115529-5f1bc7ed0d2b/go.mod h1:sd/wsWR4/Elmnsq9+c3XQqIQSkzRjF/zoNnADRt0kz0=
 github.com/katana-project/ffmpeg v0.0.0-20231126120620-955fbea1d428 h1:8CT2dUFBD6DhJnHGTd7DnNgGLrDKe1bDitv8q5lsGiQ=
 github.com/katana-project/ffmpeg v0.0.0-20231126120620-955fbea1d428/go.mod h1:sd/wsWR4/Elmnsq9+c3XQqIQSkzRjF/zoNnADRt0kz0=
+github.com/katana-project/ffmpeg v0.0.0-20231126124327-2d1a6344442d h1:5dLgXjoPij7rQSWqywNQ642DemtDvv2JT+ocofk2Ols=
+github.com/katana-project/ffmpeg v0.0.0-20231126124327-2d1a6344442d/go.mod h1:sd/wsWR4/Elmnsq9+c3XQqIQSkzRjF/zoNnADRt0kz0=
