@@ -45,6 +45,10 @@ func MustFindCodec(name string) *Codec {
 	return result
 }
 
+func (c *Codec) Name() string {
+	return c.id.Name()
+}
+
 func (c *Codec) NewEncoder() *CodecIO {
 	if c.enc == nil {
 		return nil
