@@ -41,7 +41,7 @@ func (p *Packet) ResetPos() {
 }
 
 func (p *Packet) Rescale(src, dst *Rational) {
-	p.packet.RescaleTs(src.write(), dst.write())
+	p.packet.RescaleTs(src.r, dst.r)
 }
 
 func (p *Packet) Clear() error {

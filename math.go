@@ -3,14 +3,17 @@ package mux
 import "github.com/katana-project/ffmpeg/avutil"
 
 type Rational struct {
-	Num, Den int
+	r *avutil.Rational
 }
 
-func (r *Rational) read(rational *avutil.Rational) {
-	r.Num = rational.Num()
-	r.Den = rational.Den()
+func NewRational(num, den int) *Rational {
+	return &Rational{r: avutil.MakeRational(num, den)}
 }
 
-func (r *Rational) write() *avutil.Rational {
-	return avutil.MakeRational(r.Num, r.Den)
+func (r *Rational) Num() int {
+	return r.r.Num()
+}
+
+func (r *Rational) Den() int {
+	return r.r.Den()
 }

@@ -39,10 +39,7 @@ func (s *Stream) Type() MediaType {
 }
 
 func (s *Stream) TimeBase() *Rational {
-	r := &Rational{}
-	r.read(s.stream.TimeBase())
-
-	return r
+	return &Rational{r: s.stream.TimeBase()}
 }
 
 func (s *Stream) Codec() *Codec {
