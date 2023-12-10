@@ -35,12 +35,24 @@ func main() {
 	}
 	defer outCtx.Close()
 
-	for i, inStream := range inCtx.Streams() {
-		outStream := outCtx.NewStream(nil)
+	var (
+		streams       = inCtx.Streams()
+		streamMapping = make([]int, len(streams))
+	)
+	for i, inStream := range streams {
+		codec := inStream.Codec()
+		if !mp4Muxer.SupportsCodec(codec) {
+			streamMapping[i] = -1
+			continue
+		}
+
+		outStream := outCtx.NewStream(codec)
 		if err := inStream.CopyParameters(outStream); err != nil {
 			fmt.Printf("Error copying stream %d parameters: %s\n", i, err.Error())
 			return
 		}
+
+		streamMapping[i] = outStream.Index()
 	}
 
 	pkt := mux.NewPacket()
@@ -57,15 +69,23 @@ func main() {
 		}
 
 		streamIdx := pkt.StreamIndex()
-		pkt.Rescale(
-			inCtx.Stream(streamIdx).TimeBase(),
-			outCtx.Stream(streamIdx).TimeBase(),
-		)
-		pkt.ResetPos()
+		if remapId := streamMapping[streamIdx]; remapId > -1 {
+			pkt.SetStreamIndex(remapId)
 
-		if err := outCtx.WriteFrame(pkt); err != nil {
-			fmt.Printf("Error writing frame: %s\n", err.Error())
-			break
+			pkt.Rescale(
+				inCtx.Stream(streamIdx).TimeBase(),
+				outCtx.Stream(remapId).TimeBase(),
+			)
+			pkt.ResetPos()
+			if err := outCtx.WriteFrame(pkt); err != nil {
+				fmt.Printf("Error writing frame: %s\n", err.Error())
+				break
+			}
+		} else {
+			if err := pkt.Clear(); err != nil {
+				fmt.Printf("Error clearing frame: %s\n", err.Error())
+				break
+			}
 		}
 	}
 }
