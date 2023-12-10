@@ -58,6 +58,11 @@ func main() {
 	pkt := mux.NewPacket()
 	defer pkt.Close()
 
+	if err := outCtx.WriteHeader(); err != nil {
+		fmt.Printf("Error writing header: %s\n", err.Error())
+		return
+	}
+
 	for {
 		err := inCtx.ReadFrame(pkt)
 		if err != nil {
@@ -87,5 +92,10 @@ func main() {
 				break
 			}
 		}
+	}
+
+	if err := outCtx.WriteEnd(); err != nil {
+		fmt.Printf("Error writing end: %s\n", err.Error())
+		return
 	}
 }

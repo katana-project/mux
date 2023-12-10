@@ -9,8 +9,6 @@ import (
 type IOContext struct {
 	formatCtx *avformat.FormatContext
 	outputFmt *avformat.OutputFormat
-
-	wroteStart bool
 }
 
 func NewInputContext(path string) (*IOContext, error) {
@@ -19,6 +17,7 @@ func NewInputContext(path string) (*IOContext, error) {
 		return nil, err
 	}
 	if err := wrapErrorCode(fc.FindStreamInfo(nil)); err != nil {
+		fc.CloseInput()
 		return nil, err
 	}
 
@@ -46,11 +45,6 @@ func NewOutputContext(fmt *Muxer, path string) (*IOContext, error) {
 }
 
 func (ioc *IOContext) Close() error {
-	if ioc.wroteStart {
-		if err := ioc.WriteEnd(); err != nil {
-			return err
-		}
-	}
 	if ioc.outputFmt != nil {
 		defer ioc.formatCtx.FreeContext()
 		if (ioc.outputFmt.Flags() & avformat.FmtNoFile) == 0 {
@@ -122,15 +116,7 @@ func (ioc *IOContext) NewStream(codec *Codec) *Stream {
 }
 
 func (ioc *IOContext) WriteHeader() error {
-	if ioc.wroteStart {
-		return nil
-	}
-	if err := wrapErrorCode(ioc.formatCtx.WriteHeader(nil)); err != nil {
-		return err
-	}
-
-	ioc.wroteStart = true
-	return nil
+	return wrapErrorCode(ioc.formatCtx.WriteHeader(nil))
 }
 
 func (ioc *IOContext) ReadFrame(pkt *Packet) error {
@@ -138,23 +124,9 @@ func (ioc *IOContext) ReadFrame(pkt *Packet) error {
 }
 
 func (ioc *IOContext) WriteFrame(pkt *Packet) error {
-	if !ioc.wroteStart {
-		if err := ioc.WriteHeader(); err != nil {
-			return err
-		}
-	}
-
 	return wrapErrorCode(ioc.formatCtx.InterleavedWriteFrame(pkt.packet))
 }
 
 func (ioc *IOContext) WriteEnd() error {
-	if !ioc.wroteStart {
-		return nil
-	}
-	if err := wrapErrorCode(ioc.formatCtx.WriteTrailer()); err != nil {
-		return err
-	}
-
-	ioc.wroteStart = false
-	return nil
+	return wrapErrorCode(ioc.formatCtx.WriteTrailer())
 }
