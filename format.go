@@ -95,6 +95,14 @@ func (m *Muxer) SupportsCodec(codec *Codec) bool {
 	return m.fmt.QueryCodec(codec.id, avcodec.ComplianceNormal) > 0
 }
 
+func (m *Muxer) PreferredCodecs() *CodecSet {
+	return &CodecSet{
+		Audio:    NewCodec(m.fmt.AudioCodec()),
+		Video:    NewCodec(m.fmt.VideoCodec()),
+		Subtitle: NewCodec(m.fmt.SubtitleCodec()),
+	}
+}
+
 type Demuxer struct {
 	fmt *avformat.InputFormat
 }

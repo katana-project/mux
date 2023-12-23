@@ -10,6 +10,10 @@ type Codec struct {
 	enc, dec *avcodec.Codec
 }
 
+type CodecSet struct {
+	Audio, Video, Subtitle *Codec
+}
+
 func NewCodec(id avcodec.CodecID) *Codec {
 	return &Codec{
 		id:  id,
